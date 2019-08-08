@@ -1,0 +1,14 @@
+{
+    "name": "renziito/partnership",
+    "description": "partnership",
+    "type": "project",
+    "require": {
+        "yiisoft/yii": "^1.1"
+    },
+    "authors": [
+        {
+            "name": "Renziito",
+            "email": "sepia.aki@gmail.com"
+        }
+    ]
+}
