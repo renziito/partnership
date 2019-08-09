@@ -11,7 +11,7 @@
         </script>
 
     </head>
-    <body class="bg-warning">
+    <body class="bg-partnership">
         <div class="container">
             <?= $content ?>
         </div>

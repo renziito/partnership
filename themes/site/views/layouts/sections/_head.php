@@ -26,8 +26,8 @@
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
 <link class="main-stylesheet" href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/themes/corporate.css" rel="stylesheet" type="text/css" />
 
-<link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/css/admin.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?= Yii::app()->getBaseUrl() ?>/bin/css/icons.css" rel="stylesheet" type="text/css" media="screen" />
-
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/multiselect/css/multi-select.dist.css" rel="stylesheet" type="text/css">
+
+<link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/css/style.css" rel="stylesheet" type="text/css" media="screen" />
