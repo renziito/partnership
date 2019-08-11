@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'examen':
  * @property integer $id
+ * @property string $titulo
  * @property integer $tipo_id
  * @property integer $timer
  * @property integer $random
@@ -31,10 +32,11 @@ class Examen extends CActiveRecord
 		return array(
 			array('tipo_id', 'required', 'message' => '{attribute} no debe estar vacio.'),
 			array('tipo_id, timer, random, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
+			array('titulo', 'length', 'max'=>255),
 			array('fecha', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, tipo_id, timer, random, fecha, estado', 'safe', 'on'=>'search'),
+			array('id, titulo, tipo_id, timer, random, fecha, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +58,7 @@ class Examen extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'titulo' => 'Titulo',
 			'tipo_id' => 'Tipo',
 			'timer' => 'Timer',
 			'random' => 'Random',
@@ -83,6 +86,7 @@ class Examen extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('titulo',$this->titulo,true);
 		$criteria->compare('tipo_id',$this->tipo_id);
 		$criteria->compare('timer',$this->timer);
 		$criteria->compare('random',$this->random);

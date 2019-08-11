@@ -17,26 +17,31 @@
                     <span class="title">Perfil</span>
                 </a>
             </li>
-            <li>
-                <a href="<?= Yii::app()->controller->createUrl('index') ?>" class="detailed"
-                   style="width: 100%">
-                    <span class="title">Banco de Preguntas</span>
-                </a>
-            </li>
-            <li>
-                <a href="<?= Yii::app()->controller->createUrl('index') ?>" class="detailed">
-                    <span class="title">Examenes</span>
-                </a>
-            </li>
-            <li>
-                <a href="<?= Yii::app()->controller->createUrl('index') ?>"><span class="title">Social</span></a>
-            </li>
-            <li>
-                <a href="<?= Yii::app()->controller->createUrl('index') ?>"><span class="title">Social</span></a>
-            </li>
-            <li>
-                <a href="<?= Yii::app()->controller->createUrl('index') ?>"><span class="title">Social</span></a>
-            </li>
+            <?php if (Yii::app()->user->rol == "admin"): ?>
+                <li>
+                    <a href="<?= Yii::app()->createUrl('admin/usuario') ?>" class="detailed"
+                       style="width: 100%">
+                        <span class="title">Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Yii::app()->createUrl('admin/examen') ?>" class="detailed">
+                        <span class="title">Exámenes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Yii::app()->controller->createUrl('index') ?>"
+                       style="width: 100%">
+                        <span class="title">Revisión de Notas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Yii::app()->createUrl('admin/tipo') ?>" class="detailed"
+                       style="width: 100%">
+                        <span class="title">Tipo Exámen</span>
+                    </a>
+                </li>
+            <?php endif; ?>
             <li>
                 <a href="<?= Yii::app()->createUrl('logout') ?>" class="detailed"
                    style="width: 100%">

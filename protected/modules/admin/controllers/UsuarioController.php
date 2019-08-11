@@ -1,17 +1,19 @@
 <?php
 
-class TipoController extends Controller {
+class UsuarioController extends Controller {
 
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      */
     public function actionCreate() {
-        $model = new Tipo;
-        $post  = Yii::app()->request->getPost('Tipo', false);
+        $model = new Usuario;
+        $post  = Yii::app()->request->getPost('Usuario', false);
 
         if ($post) {
             $model->attributes = $post;
+            $model->username   = $model->dni;
+            $model->password   = password_hash($model->dni, PASSWORD_DEFAULT);
             if ($model->save()) {
                 $this->redirect(['index']);
             }
@@ -27,7 +29,7 @@ class TipoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-        $post  = Yii::app()->request->getPost('Tipo', false);
+        $post  = Yii::app()->request->getPost('Usuario', false);
 
         if ($post) {
             $model->attributes = $post;
@@ -57,9 +59,9 @@ class TipoController extends Controller {
      * Manages all models.
      */
     public function actionIndex() {
-        $model      = new Tipo('search');
+        $model      = new Usuario('search');
         $model->unsetAttributes();  // clear any default values
-        $attributes = Yii::app()->request->getQuery('Tipo', false);
+        $attributes = Yii::app()->request->getQuery('Usuario', false);
         if ($attributes) {
             $model->attributes = $attributes;
         }
@@ -70,11 +72,11 @@ class TipoController extends Controller {
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return Tipo the loaded model
+     * @return Usuario the loaded model
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = Tipo::model()->findByPk($id);
+        $model = Usuario::model()->findByPk($id);
         if ($model === null) {
             throw new CHttpException(404, 'La página solicitada no existe.');
         }

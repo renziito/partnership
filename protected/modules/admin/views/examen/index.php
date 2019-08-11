@@ -1,27 +1,50 @@
 <?php
-/* @var $this TipoController */
-/* @var $model Tipo */
+/* @var $this ExamenController */
+/* @var $model Examen */
 
 $this->breadcrumbs = array(
-    'Tipos' => array('index'),
+    'Exámenes' => array('index'),
     'Administrar',
 );
 ?>
 
 <h1>
-    Administrador de Tipos    
+    Administrador de Exámenes    
     <a class="pull-right btn btn-success" href="<?= $this->createUrl("create") ?>">Nuevo</a>
 </h1>
 
 <div class="table-responsive">
     <?php
     $this->widget('zii.widgets.grid.CGridView', [
-        'id'           => 'tipo-grid',
+        'id'           => 'examen-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
         'columns'      => [
             'id',
-            'tipo',
+            'titulo',
+            [
+                'name'   => 'tipo_id',
+                'header' => 'Tipo',
+                'value'  => function($data) {
+                    return Tipo::model()->findbyPk($data->tipo_id)->tipo;
+                }
+            ],
+            [
+                'header' => 'Asignados',
+                'value'  => function($data) {
+                    $asignados = UsuarioExamen::model()->count(
+                            'estado = 1 AND examen_id = ' . $data->id
+                    );
+                    return $asignados;
+                }
+            ],
+            'timer',
+            [
+                'name'  => 'random',
+                'value' => function($data) {
+                    return ($data->random == 1 ? 'VERDADERO' : 'FALSO');
+                }
+            ],
             [
                 'class'    => 'CButtonColumn',
                 'template' => '{actualiza}{eliminar}',

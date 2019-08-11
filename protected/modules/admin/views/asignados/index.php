@@ -1,27 +1,38 @@
 <?php
-/* @var $this TipoController */
-/* @var $model Tipo */
+/* @var $this AsignadosController */
+/* @var $model UsuarioExamen */
 
 $this->breadcrumbs = array(
-    'Tipos' => array('index'),
+    'Usuario Examens' => array('index'),
     'Administrar',
 );
 ?>
 
 <h1>
-    Administrador de Tipos    
-    <a class="pull-right btn btn-success" href="<?= $this->createUrl("create") ?>">Nuevo</a>
+    Administrador de Usuario Examens    <a class="pull-right btn btn-success" href="<?= $this->createUrl("create") ?>">Nuevo</a>
 </h1>
 
 <div class="table-responsive">
     <?php
     $this->widget('zii.widgets.grid.CGridView', [
-        'id'           => 'tipo-grid',
+        'id'           => 'usuario-examen-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
         'columns'      => [
             'id',
-            'tipo',
+            [
+                'name'  => 'usuario_id',
+                'value' => function($data) {
+                    return Usuario::model()->findByPk($data->usuario_id)->nombres;
+                }
+            ],
+            [
+                'name'  => 'examen_id',
+                'value' => function($data) {
+                    return Examen::model()->findByPk($data->examen_id)->titulo;
+                }
+            ],
+            'hasta',
             [
                 'class'    => 'CButtonColumn',
                 'template' => '{actualiza}{eliminar}',
