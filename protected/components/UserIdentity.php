@@ -18,16 +18,25 @@ class UserIdentity extends CUserIdentity {
      * @return boolean whether authentication succeeds.
      */
     public function authenticate() {
-        $users           = array(
-            'demo'  => 'demo',
-            'admin' => 'admin',
-        );
-        if (!isset($users[$this->username]))
+        Utils::setBusqueda([
+            'username' => $this->username,
+            'estado'   => 1
+        ]);
+        $model = Usuario::model()->find(Utils::getBusqueda());
+        if (!($model)) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
-        elseif ($users[$this->username] !== $this->password)
-            $this->errorCode = self::ERROR_PASSWORD_INVALID;
-        else
-            $this->errorCode = self::ERROR_NONE;
+        } else {
+            if (password_verify($this->password, $model->password)) {
+                $this->_id       = $model->id;
+                $this->setState("correo", $model->correo);
+                $this->setState("rol", $model->rol);
+                $this->setState("nombres", $model->nombres);
+                $this->setState("apellidos", $model->apellidos);
+                $this->errorCode = self::ERROR_NONE;
+            } else {
+                $this->errorCode = self::ERROR_PASSWORD_INVALID;
+            }
+        }
         return !$this->errorCode;
     }
 

@@ -1,17 +1,27 @@
 <?php
 /* @var $this DefaultController */
 
-$this->breadcrumbs=array(
-	$this->module->id,
+$this->breadcrumbs = array(
+    $this->module->id,
 );
 ?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1>
-
-<p>
-This is the view content for action "<?php echo $this->action->id; ?>".
-The action belongs to the controller "<?php echo get_class($this); ?>"
-in the "<?php echo $this->module->id; ?>" module.
-</p>
-<p>
-You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
-</p>
+<div class="container text-center">
+    <h1 class="m-b-50"><b>BIENVENIDO <?= strtoupper(Yii::app()->user->nombres) ?></b></h1>
+    <small>¿Que necesitas hacer?</small>
+    <div class="row m-t-20">
+        <div class="col-md-6">
+            <a href="<?= $this->createUrl('prueba') ?>" >
+                <div class="btn-portal"
+                     style="background: url(<?= Yii::app()->getBaseUrl(true) ?>/images/exam.jpg)">
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 btn-portal">
+            <a href="<?= $this->createUrl('prueba') ?>" >
+                <div class="btn-portal"
+                     style="background: url(<?= Yii::app()->getBaseUrl(true) ?>/images/notas.jpg)">
+                </div>
+            </a>>
+        </div>
+    </div>
+</div>

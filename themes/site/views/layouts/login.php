@@ -9,7 +9,6 @@
                     document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/windows.chrome.fix.css" />'
             }
         </script>
-
     </head>
     <body class="bg-partnership">
         <div class="container">

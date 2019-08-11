@@ -5,15 +5,15 @@
         <?php $this->renderPartial('//layouts/sections/_head'); ?>
         <script src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
     </head>
-    <body class="fixed-header dashboard menu-pin menu-behind">   
-        <?php $this->renderPartial('//layouts/sections/_navbar'); ?>
+    <body class="fixed-header menu-pin menu-behind menu-pin">
+        <?= $this->renderPartial('//layouts/sections/_navbar'); ?>
         <div class="page-container ">
             <?php $this->renderPartial('//layouts/sections/_header'); ?>
 
             <div class="page-content-wrapper ">
                 <div class="content ">
                     <div class="jumbotron" data-pages="parallax">
-                        <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+                        <div class=" container-fluid  container-fixed-lg sm-p-l-0 sm-p-r-0">
                             <div class="inner">
                                 <?php if ($this->breadcrumbs) : ?>
                                     <?php $this->renderPartial('//layouts/sections/_breadcrumb', ['breadcrumbs' => $this->breadcrumbs]); ?>
