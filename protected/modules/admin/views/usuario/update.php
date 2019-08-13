@@ -2,12 +2,11 @@
 /* @var $this UsuarioController */
 /* @var $model Usuario */
 
-$this->breadcrumbs=array(
-	'Usuarios'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Actualizar',
+$this->breadcrumbs = array(
+    'Usuarios' => [Yii::app()->createUrl('admin/usuario')],
+    'Actualizar'
 );
 ?>
 <h1>Actualizar Usuario <?php echo $model->id; ?></h1>
 <div class="container">
-    <?php $this->renderPartial('_form', array('model'=>$model)); ?></div>
+    <?php $this->renderPartial('_form', array('model' => $model)); ?></div>

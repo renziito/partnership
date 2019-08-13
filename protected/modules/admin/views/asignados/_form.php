@@ -2,9 +2,16 @@
 /* @var $this AsignadosController */
 /* @var $model UsuarioExamen */
 /* @var $form CActiveForm */
-?>
+$id = Yii::app()->request->getQuery('id');
 
-<div class="form">
+$usuarioModel = QUsuarios::getAll($id);
+?>
+<div class="pull-right">
+    <a href="<?= $this->createUrl('index', ['id' => $id]) ?>" 
+       class="btn btn-danger">Volver</a>
+</div>
+
+<div class="form m-t-40">
 
     <?php
     $form         = $this->beginWidget('CActiveForm', [
@@ -18,10 +25,9 @@
     <?= $form->errorSummary($model, '<b>Por favor verifique los siguientes errores : </b>'); ?>
 
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-9 col-xs-12">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'usuario_id'); ?>
-                <?php $usuarioModel = Usuario::model()->findAll('estado = 1'); ?>
                 <?php $user         = Chtml::listData($usuarioModel, 'id', 'nombres') ?>
                 <?=
                 $form->dropDownList($model, 'usuario_id', $user, [
@@ -30,27 +36,11 @@
                 ?>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-3 col-xs-12">
             <div class="form-group form-group-default required">
-                <?= $form->labelEx($model, 'examen_id'); ?>
-                <?php $examenModel  = Examen::model()->findAll('estado = 1'); ?>
-                <?php $examen       = Chtml::listData($examenModel, 'id', 'titulo') ?>
-                <?=
-                $form->dropDownList($model, 'examen_id', $examen, [
-                    'class' => 'select2'
-                ])
-                ?>
+                <?= $form->labelEx($model, 'hasta'); ?>
+                <?= $form->dateField($model, 'hasta', ['class' => 'form-control', 'required' => 'required']); ?>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-9">
-            <?= $form->labelEx($model, 'hasta'); ?>
-            <?= $form->dateField($model, 'hasta', ['class' => 'form-control']); ?>
         </div>
     </div>
 

@@ -3,8 +3,7 @@
 /* @var $model Examen */
 
 $this->breadcrumbs = array(
-    'Exámenes' => array('index'),
-    'Administrar',
+    'Exámenes',
 );
 ?>
 
@@ -20,7 +19,10 @@ $this->breadcrumbs = array(
         'dataProvider' => $model->search(),
         'filter'       => $model,
         'columns'      => [
-            'id',
+            [
+                'name'        => 'id',
+                'htmlOptions' => array('style' => 'width: 50px;'),
+            ],
             'titulo',
             [
                 'name'   => 'tipo_id',
@@ -30,29 +32,45 @@ $this->breadcrumbs = array(
                 }
             ],
             [
-                'header' => 'Asignados',
-                'value'  => function($data) {
+                'header'      => 'Asignados',
+                'htmlOptions' => array('style' => 'width: 50px;'),
+                'value'       => function($data) {
                     $asignados = UsuarioExamen::model()->count(
                             'estado = 1 AND examen_id = ' . $data->id
                     );
                     return $asignados;
                 }
             ],
-            'timer',
             [
-                'name'  => 'random',
-                'value' => function($data) {
+                'name'        => 'timer',
+                'htmlOptions' => array('style' => 'width: 50px;'),
+            ],
+            [
+                'name'        => 'random',
+                'htmlOptions' => array('style' => 'width: 50px;'),
+                'value'       => function($data) {
                     return ($data->random == 1 ? 'VERDADERO' : 'FALSO');
                 }
             ],
             [
-                'class'    => 'CButtonColumn',
-                'template' => '{actualiza}{eliminar}',
-                'buttons'  => [
+                'class'       => 'CButtonColumn',
+                'template'    => '{actualiza}{pregunta}{asignar}{eliminar}',
+                'htmlOptions' => array('style' => 'width: 200px; text-align:center'),
+                'buttons'     => [
                     'actualiza' => array(
                         'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("update", array("id"=>$data->id))',
                         'options' => array('title' => 'Actualizar', 'data-toggle' => 'tooltip'),
+                    ),
+                    'pregunta'  => array(
+                        'label'   => '<i class="fa fa-question-circle fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->createUrl("/admin/pregunta", array("id"=>$data->id))',
+                        'options' => array('title' => 'Preguntas', 'data-toggle' => 'tooltip'),
+                    ),
+                    'asignar'   => array(
+                        'label'   => '<i class="fa fa-users fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->createUrl("/admin/asignados", array("id"=>$data->id))',
+                        'options' => array('title' => 'Asignar', 'data-toggle' => 'tooltip'),
                     ),
                     'eliminar'  => array(
                         'label'   => '<i class="fa fa-trash fa-2x" style="margin-right:10px"></i>',

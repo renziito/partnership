@@ -5,7 +5,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta content="BeatlesPeru - Pagina de Administracion" name="description" />
+<meta content="Partnership - Pagina de Administracion" name="description" />
 <meta name="robots" content="index,follow">
 <meta content="" name="author" />
 
@@ -23,6 +23,8 @@
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/mapplic/css/mapplic.css" rel="stylesheet" type="text/css" />
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" />
+<link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/summernote/css/summernote-bs3.css" rel="stylesheet" type="text/css" />
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
 <link class="main-stylesheet" href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/themes/corporate.css" rel="stylesheet" type="text/css" />
 
@@ -31,3 +33,13 @@
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/multiselect/css/multi-select.dist.css" rel="stylesheet" type="text/css">
 
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<style>
+    .dropdown-toggle::after {
+        display: inline-block; 
+        margin-left: .255em; 
+        border-top: 0 !important; 
+        border-right: .3em solid transparent; 
+        border-bottom: 0; 
+        border-left: .3em solid transparent; 
+    }
+</style>

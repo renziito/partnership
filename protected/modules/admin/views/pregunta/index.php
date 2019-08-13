@@ -1,33 +1,49 @@
 <?php
-/* @var $this TipoController */
-/* @var $model Tipo */
+/* @var $this PreguntaController */
+/* @var $model Pregunta */
 
 $this->breadcrumbs = array(
-    'Tipos'
+    'Examen' => [Yii::app()->createUrl('admin/examen')],
+    'Preguntas'
 );
+
+$id               = Yii::app()->request->getQuery('id');
+$model->examen_id = $id;
 ?>
 
 <h1>
-    Administrador de Tipos    
-    <a class="pull-right btn btn-success" href="<?= $this->createUrl("create") ?>">Nuevo</a>
+    Administrador de Preguntas    
+    <a class="pull-right btn btn-danger" href="<?= Yii::app()->createUrl('admin/examen') ?>">Volver</a>
+    <a class="pull-right btn btn-success m-r-10" href="<?= $this->createUrl("create", ['id' => $id]) ?>">Nuevo</a>
 </h1>
 
 <div class="table-responsive">
     <?php
     $this->widget('zii.widgets.grid.CGridView', [
-        'id'           => 'tipo-grid',
+        'id'           => 'pregunta-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
         'columns'      => [
             'id',
-            'tipo',
+            [
+                'name'  => 'pregunta',
+                'value' => function($data) {
+                    echo $data->pregunta;
+                }
+            ],
+            [
+                'name'  => 'random',
+                'value' => function($data) {
+                    echo ($data->random) ? 'VERDADERO' : 'FALSO';
+                }
+            ],
             [
                 'class'       => 'CButtonColumn',
                 'template'    => '{actualiza}{eliminar}',
-                'htmlOptions' => array('style' => 'width: 250px; text-align:center'),
+                'htmlOptions' => array('style' => 'width: 150px; text-align:center'),
                 'buttons'     => [
                     'actualiza' => array(
-                        'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:20px"></i>',
+                        'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("update", array("id"=>$data->id))',
                         'options' => array('title' => 'Actualizar', 'data-toggle' => 'tooltip'),
                     ),

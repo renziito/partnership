@@ -1,14 +1,14 @@
 <?php
 
-class AsignadosController extends Controller {
+class PreguntaController extends Controller {
 
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      */
     public function actionCreate($id) {
-        $model = new UsuarioExamen;
-        $post  = Yii::app()->request->getPost('UsuarioExamen', false);
+        $model = new Pregunta;
+        $post  = Yii::app()->request->getPost('Pregunta', false);
 
         if ($post) {
             $model->attributes = $post;
@@ -23,6 +23,26 @@ class AsignadosController extends Controller {
     }
 
     /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id the ID of the model to be updated
+     */
+    public function actionUpdate($id) {
+        $model = $this->loadModel($id);
+        $post  = Yii::app()->request->getPost('Pregunta', false);
+
+        if ($post) {
+            $model->attributes = $post;
+            if ($model->save()) {
+                $route = $this->createUrl('index', ['id' => $id]);
+                $this->redirect($route);
+            }
+        }
+
+        $this->render('update', ['model' => $model]);
+    }
+
+    /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
@@ -32,9 +52,8 @@ class AsignadosController extends Controller {
         $model->estado = 0;
 
         if ($model->save()) {
-            $route = $this->createUrl('index', ['id' => $model->examen_id]);
+            $route = $this->createUrl('index', ['id' => $id]);
             $this->redirect($route);
-            $this->redirect(['index']);
         }
     }
 
@@ -42,9 +61,9 @@ class AsignadosController extends Controller {
      * Manages all models.
      */
     public function actionIndex() {
-        $model      = new UsuarioExamen('search');
+        $model      = new Pregunta('search');
         $model->unsetAttributes();  // clear any default values
-        $attributes = Yii::app()->request->getQuery('UsuarioExamen', false);
+        $attributes = Yii::app()->request->getQuery('Pregunta', false);
         if ($attributes) {
             $model->attributes = $attributes;
         }
@@ -55,11 +74,11 @@ class AsignadosController extends Controller {
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return UsuarioExamen the loaded model
+     * @return Pregunta the loaded model
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = UsuarioExamen::model()->findByPk($id);
+        $model = Pregunta::model()->findByPk($id);
         if ($model === null) {
             throw new CHttpException(404, 'La página solicitada no existe.');
         }

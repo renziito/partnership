@@ -3,8 +3,8 @@
 /* @var $model UsuarioExamen */
 
 $this->breadcrumbs = array(
-    'Exámenes' => array('index'),
-    'Asignar',
+    'Exámenes' => [Yii::app()->createUrl('admin/examen')],
+    'Asignar'
 );
 ?>
 

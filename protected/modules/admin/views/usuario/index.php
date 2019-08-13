@@ -28,9 +28,22 @@ $this->breadcrumbs = array(
             'dni',
             'correo',
             [
-                'class'              => 'CButtonColumn',
-                'template'           => '{update}{delete}',
-                'deleteConfirmation' => "js:'Se va a eliminar el evento : '+$(this).parent().parent().children(':nth-child(2)').text()+'?'",
+                'class'       => 'CButtonColumn',
+                'template'    => '{actualiza}{eliminar}',
+                'htmlOptions' => array('style' => 'width: 150px; text-align:center'),
+                'buttons'     => [
+                    'actualiza' => array(
+                        'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->controller->createUrl("update", array("id"=>$data->id))',
+                        'options' => array('title' => 'Actualizar', 'data-toggle' => 'tooltip'),
+                    ),
+                    'eliminar'  => array(
+                        'label'   => '<i class="fa fa-trash fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->controller->createUrl("delete", array("id"=>$data->id))',
+                        'options' => array('title' => 'Eliminar', 'data-toggle' => 'tooltip'),
+                        'click'   => 'function(){ var conf = confirm("Eliminar?"); if(conf==false)return false;}',
+                    ),
+                ]
             ],
         ],
     ]);
