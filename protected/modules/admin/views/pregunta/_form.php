@@ -2,14 +2,16 @@
 /* @var $this PreguntaController */
 /* @var $model Pregunta */
 /* @var $form CActiveForm */
-$id               = Yii::app()->request->getQuery('id');
-$model->examen_id = $id;
+if ($model->isNewRecord) {
+    $id               = Yii::app()->request->getQuery('id');
+    $model->examen_id = $id;
+}
 ?>
 
 <div class="form">
 
     <?php
-    $form             = $this->beginWidget('CActiveForm', [
+    $form = $this->beginWidget('CActiveForm', [
         'id'                   => 'pregunta-form',
         'enableAjaxValidation' => false,
     ]);
@@ -19,10 +21,10 @@ $model->examen_id = $id;
 
     <?= $form->errorSummary($model, '<b>Por favor verifique los siguientes errores : </b>'); ?>
 
+    <?= $form->hiddenField($model, 'examen_id'); ?>
     <div class="row">
         <div class="col-xs-9">
             <div class="form-group form-group-default required">
-                <?= $form->hiddenField($model, 'examen_id'); ?>
                 <?= $form->labelEx($model, 'pregunta'); ?>
                 <?= $form->textArea($model, 'pregunta', array('class' => 'summernote')); ?>
             </div>

@@ -10,18 +10,20 @@ $this->breadcrumbs = array(
     <small>¿Que necesitas hacer?</small>
     <div class="row m-t-20">
         <div class="col-md-6">
-            <a href="<?= $this->createUrl('prueba') ?>" >
+            <a href="<?= $this->createUrl('pruebas') ?>" >
                 <div class="btn-portal"
                      style="background: url(<?= Yii::app()->getBaseUrl(true) ?>/images/exam.jpg)">
+                    <h3>RENDIR EXÁMEN</h3>
                 </div>
             </a>
         </div>
-        <div class="col-md-6 btn-portal">
+        <div class="col-md-6">
             <a href="<?= $this->createUrl('prueba') ?>" >
                 <div class="btn-portal"
                      style="background: url(<?= Yii::app()->getBaseUrl(true) ?>/images/notas.jpg)">
+                    <h3>REVISAR NOTAS</h3>
                 </div>
-            </a>>
+            </a>
         </div>
     </div>
 </div>

@@ -38,16 +38,35 @@ $model->examen_id = $id;
                 }
             ],
             [
+                'header' => 'Alternativas',
+                'value'  => function($data) {
+                    $where    = "estado = 1 AND pregunta_id = " . $data->id;
+                    $total    = Respuesta::model()->count($where);
+                    $where    .= " AND correcta = 1";
+                    $correcta = Respuesta::model()->count($where);
+                    if ($correcta == 0) {
+                        $total = "<i class='fas fa-times fa-4x text-danger'></i>";
+                    }
+
+                    echo $total;
+                }
+            ],
+            [
                 'class'       => 'CButtonColumn',
-                'template'    => '{actualiza}{eliminar}',
+                'template'    => '{actualiza}{alternativas}{eliminar}',
                 'htmlOptions' => array('style' => 'width: 150px; text-align:center'),
                 'buttons'     => [
-                    'actualiza' => array(
+                    'actualiza'    => array(
                         'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("update", array("id"=>$data->id))',
                         'options' => array('title' => 'Actualizar', 'data-toggle' => 'tooltip'),
                     ),
-                    'eliminar'  => array(
+                    'alternativas' => array(
+                        'label'   => '<i class="fa fa-info-circle fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->createUrl("admin/alternativas", array("id"=>$data->id))',
+                        'options' => array('title' => 'Alternativas', 'data-toggle' => 'tooltip'),
+                    ),
+                    'eliminar'     => array(
                         'label'   => '<i class="fa fa-trash fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("delete", array("id"=>$data->id))',
                         'options' => array('title' => 'Eliminar', 'data-toggle' => 'tooltip'),

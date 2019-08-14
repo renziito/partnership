@@ -42,6 +42,16 @@ $this->breadcrumbs = array(
                 }
             ],
             [
+                'header'      => 'Preguntas',
+                'htmlOptions' => array('style' => 'width: 50px;'),
+                'value'       => function($data) {
+                    $asignados = Pregunta::model()->count(
+                            'estado = 1 AND examen_id = ' . $data->id
+                    );
+                    return $asignados;
+                }
+            ],
+            [
                 'name'        => 'timer',
                 'htmlOptions' => array('style' => 'width: 50px;'),
             ],
