@@ -83,4 +83,15 @@
     font-weight: bolder !important;
     padding: 5px !important;
     margin-left: -4% !important;
+
+}
+
+.grid-view table.items th a {
+    color: grey !important;
+}
+
+.grid-view table.items th {
+    background: rgb(142,183,30);
+    background: linear-gradient(0deg, rgba(142,183,30,1) 0%, rgba(205,227,145,1) 55%, rgba(142,183,30,1) 100%);
+    color: grey !important;
 }
