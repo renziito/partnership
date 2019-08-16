@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
             </a>
         </div>
         <div class="col-md-6">
-            <a href="<?= $this->createUrl('prueba') ?>" >
+            <a href="<?= $this->createUrl('notas') ?>" >
                 <div class="btn-portal"
                      style="background: url(<?= Yii::app()->getBaseUrl(true) ?>/images/notas.jpg)">
                     <h3>REVISAR NOTAS</h3>

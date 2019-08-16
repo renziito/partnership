@@ -53,11 +53,13 @@
         </div>
         <div class="col-md-6 col-xs-12">
             <div class="form-group form-group-default required">
-                <?= $form->labelEx($model, 'random'); ?>
-                <?php $tipos      = [0 => 'FALSO', '1' => 'VERDADERO']; ?>
+                <?= $form->labelEx($model, 'random', ['label' => 'Preguntas en orden aleatorio']); ?>
                 <?=
-                $form->dropDownList($model, 'random', $tipos, [
-                    'class' => 'form-control'
+                $form->checkBox($model, 'random', [
+                    'data-init-plugin' => 'switchery',
+                    'data-size'        => 'small',
+                    'data-color'       => "primary",
+                    'data-switchery'   => "true"
                 ]);
                 ?>
             </div>

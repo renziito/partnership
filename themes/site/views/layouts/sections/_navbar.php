@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= Yii::app()->controller->createUrl('index') ?>"
+                    <a href="<?= Yii::app()->createUrl('admin/notas') ?>"
                        style="width: 100%">
                         <span class="title">Revisión de Notas</span>
                     </a>

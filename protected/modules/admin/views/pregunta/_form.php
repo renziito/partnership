@@ -23,7 +23,7 @@ if ($model->isNewRecord) {
 
     <?= $form->hiddenField($model, 'examen_id'); ?>
     <div class="row">
-        <div class="col-xs-9">
+        <div class="col-md-9 col-xs-12">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'pregunta'); ?>
                 <?= $form->textArea($model, 'pregunta', array('class' => 'summernote')); ?>
@@ -32,16 +32,18 @@ if ($model->isNewRecord) {
     </div>
 
     <div class="row">
-        <div class="col-xs-9">
-            <?= $form->labelEx($model, 'random'); ?>
-            <?=
-            $form->checkBox($model, 'random', [
-                'data-init-plugin' => 'switchery',
-                'data-size'        => 'small',
-                'data-color'       => "primary",
-                'data-switchery'   => "true"
-            ]);
-            ?>
+        <div class="col-md-9 col-xs-12">
+            <div class="form-group form-group-default required">
+                <?= $form->labelEx($model, 'random', ['label' => 'Alternativas en orden aleatorio']); ?>
+                <?=
+                $form->checkBox($model, 'random', [
+                    'data-init-plugin' => 'switchery',
+                    'data-size'        => 'small',
+                    'data-color'       => "primary",
+                    'data-switchery'   => "true"
+                ]);
+                ?>
+            </div>
         </div>
     </div>
 

@@ -2,13 +2,16 @@
 /* @var $this AlternativasController */
 /* @var $model Respuesta */
 
+$id                = Yii::app()->request->getQuery('id');
+$model->pregunta_id = $id;
+$pregunta = Pregunta::model()->findByPk($id);
+
 $this->breadcrumbs = array(
     'Exámen'    => [Yii::app()->createUrl('admin/examen')],
-    'Preguntas' => [Yii::app()->createUrl('admin/examen')],
+    'Preguntas' => [Yii::app()->createUrl('admin/pregunta/index', ['id' => $pregunta->examen_id])],
     'Alternativas',
 );
 
-$id                 = Yii::app()->request->getQuery('id');
 $model->pregunta_id = $id;
 
 $pregunta = Pregunta::model()->findByPk($id);

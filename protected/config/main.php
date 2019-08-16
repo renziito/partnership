@@ -37,6 +37,7 @@ return array(
             'urlFormat'      => 'path',
             'showScriptName' => false,
             'rules'          => array(
+                'perfil'                                 => 'site/perfil',
                 'login'                                  => 'site/login',
                 'logout'                                 => 'site/logout',
                 '<controller:\w+>/<id:\d+>'              => '<controller>/view',

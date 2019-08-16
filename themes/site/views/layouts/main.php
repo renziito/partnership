@@ -29,13 +29,11 @@
 
                 <div class=" container-fluid  container-fixed-lg footer">
                     <div class="copyright sm-text-center">
-                        <p class="small no-margin pull-left sm-pull-reset">
+                        <p class="small no-margin pull-right sm-pull-reset">
                             <span class="hint-text">Copyright &copy; <?= date('Y') ?> </span>
                             <span class="font-montserrat"><?= $_SERVER['HTTP_HOST'] ?></span>.
                             <span class="hint-text">All rights reserved. </span>
-                        </p>
-                        <p class="small no-margin pull-right sm-pull-reset">
-                            <span class="hint-text">Made with Love <i class="fas fa-heart"></i></span>
+                            <!--<span class="hint-text">Made with Love <i class="fas fa-heart"></i></span>-->
                         </p>
                         <div class="clearfix"></div>
                     </div>

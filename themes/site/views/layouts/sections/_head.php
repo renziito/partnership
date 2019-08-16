@@ -9,8 +9,8 @@
 <meta name="robots" content="index,follow">
 <meta content="" name="author" />
 
-<link rel="shortcut icon" href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/img/favicon.ico">
-<link rel="icon" type="image/x-icon" href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/img/favicon.ico" />
+<link rel="shortcut icon" href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/favicon.ico">
+<link rel="icon" type="image/x-icon" href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/favicon.ico" />
 
 <link href="//bootswatch.com/3/darkly/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
 
@@ -25,7 +25,6 @@
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" />
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/plugins/summernote/css/summernote-bs3.css" rel="stylesheet" type="text/css" />
-<link href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
 <link class="main-stylesheet" href="<?= Yii::app()->theme->getBaseUrl() ?>/pages/css/themes/corporate.css" rel="stylesheet" type="text/css" />
 
 <link href="<?= Yii::app()->theme->getBaseUrl() ?>/assets/css/admin.css" rel="stylesheet" type="text/css" media="screen" />

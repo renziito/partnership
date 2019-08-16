@@ -15,7 +15,7 @@ $this->breadcrumbs = array(
             <p class="text-justify">
                 Está a punto de ingresar a la interface para realizar las pruebas.
                 Tenga en cuenta que las pruebas pueden tener una duración determinada. 
-                Reserve un tiempo y lugar orpicios para evitar interrupciones y 
+                Reserve un tiempo y lugar propicio para evitar interrupciones y 
                 realizar la prueba de corrido.
             </p>
 

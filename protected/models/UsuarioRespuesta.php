@@ -1,26 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "usuario_examen".
+ * This is the model class for table "usuario_respuesta".
  *
- * The followings are the available columns in table 'usuario_examen':
+ * The followings are the available columns in table 'usuario_respuesta':
  * @property integer $id
  * @property integer $usuario_id
  * @property integer $examen_id
- * @property string $respuesta
- * @property string $nota
- * @property string $hasta
- * @property string $fecha
+ * @property integer $pregunta_id
+ * @property integer $alternativa_id
  * @property integer $estado
  */
-class UsuarioExamen extends CActiveRecord
+class UsuarioRespuesta extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'usuario_examen';
+		return 'usuario_respuesta';
 	}
 
 	/**
@@ -31,13 +29,11 @@ class UsuarioExamen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usuario_id, examen_id', 'required', 'message' => '{attribute} no debe estar vacio.'),
-			array('usuario_id, examen_id, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
-			array('nota', 'length', 'max'=>18),
-			array('respuesta, hasta, fecha', 'safe'),
+			array('usuario_id, examen_id, pregunta_id, alternativa_id', 'required', 'message' => '{attribute} no debe estar vacio.'),
+			array('usuario_id, examen_id, pregunta_id, alternativa_id, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, usuario_id, examen_id, respuesta, nota, hasta, fecha, estado', 'safe', 'on'=>'search'),
+			array('id, usuario_id, examen_id, pregunta_id, alternativa_id, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,10 +57,8 @@ class UsuarioExamen extends CActiveRecord
 			'id' => 'ID',
 			'usuario_id' => 'Usuario',
 			'examen_id' => 'Examen',
-			'respuesta' => 'Respuesta',
-			'nota' => 'Nota',
-			'hasta' => 'Hasta',
-			'fecha' => 'Fecha',
+			'pregunta_id' => 'Pregunta',
+			'alternativa_id' => 'Alternativa',
 			'estado' => 'Estado',
 		);
 	}
@@ -90,12 +84,8 @@ class UsuarioExamen extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('usuario_id',$this->usuario_id);
 		$criteria->compare('examen_id',$this->examen_id);
-		$criteria->compare('respuesta',$this->respuesta,true);
-		$criteria->compare('nota',$this->nota,true);
-		$criteria->compare('hasta',$this->hasta,true);
-		$criteria->compare('fecha',$this->fecha,true);
-
-		$criteria->order = 'fecha DESC';
+		$criteria->compare('pregunta_id',$this->pregunta_id);
+		$criteria->compare('alternativa_id',$this->alternativa_id);
 		$criteria->compare('estado',$this->estado);
 
 		$criteria->addCondition('estado = TRUE','AND');
@@ -109,7 +99,7 @@ class UsuarioExamen extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UsuarioExamen the static model class
+	 * @return UsuarioRespuesta the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

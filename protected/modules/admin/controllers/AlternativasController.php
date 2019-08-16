@@ -7,8 +7,9 @@ class AlternativasController extends Controller {
      * If creation is successful, the browser will be redirected to the 'index' page.
      */
     public function actionCreate($id) {
-        $model = new Respuesta;
-        $post  = Yii::app()->request->getPost('Respuesta', false);
+        $model              = new Respuesta;
+        $post               = Yii::app()->request->getPost('Respuesta', false);
+        $model->pregunta_id = $id;
 
         if ($post) {
             $model->attributes = $post;

@@ -62,4 +62,30 @@ class SiteController extends Controller {
         $this->redirect(Yii::app()->homeUrl);
     }
 
+    public function actionPerfil() {
+        $id    = Yii::app()->request->getQuery('iden', Yii::app()->user->id);
+        $user  = Usuario::model()->findbyPk($id);
+        $post  = Yii::app()->request->getPost('Usuario', false);
+        $error = false;
+        if ($post) {
+            if (password_verify($post['contrasena'], $user->password)) {
+                $user->attributes = $post;
+                if (isset($post['nclave']) && $post['nclave'] != "") {
+                    if ($this->validateChange($post)) {
+                        $user->password = password_hash($post['nclave'], PASSWORD_DEFAULT);
+                    } else {
+                        $error = "EN EL CAMBIO DE CONTRASEÑA";
+                    }
+                }
+            } else {
+                $error = "LA CONTRASEÑA NO ES CORRECTA";
+            }
+            if (!$error) {
+                $user->update();
+                $this->redirect($this->createUrl('perfil'));
+            }
+        }
+        $this->render('perfil', compact('user', 'error'));
+    }
+
 }
