@@ -30,11 +30,11 @@ class QUsuarios {
         return Yii::app()->db->createCommand($sql)->queryAll();
     }
 
-    public static function encryptIt($pure_string) {
+    public static function encrypt_old($pure_string) {
         $dirty = array("+", "/", "=");
         $clean = array("_PLUS_", "_SLASH_", "_EQUAL_");
 
-        $cookie         = new CHttpCookie('secret-key', date('YmdHis'));
+        $cookie         = new CHttpCookie('secret-key', date('YmdHis') . Yii::app()->user->id);
         $cookie->expire = time() + 60 * 60 * 24 * 180;
 
         Yii::app()->request->cookies['secret-key'] = $cookie;
@@ -44,7 +44,7 @@ class QUsuarios {
         return str_replace($dirty, $clean, $encrypted_string);
     }
 
-    public static function decryptIt($encrypted_string) {
+    public static function decrypt_old($encrypted_string) {
         $dirty = array("+", "/", "=");
         $clean = array("_PLUS_", "_SLASH_", "_EQUAL_");
 
@@ -57,6 +57,46 @@ class QUsuarios {
 
         $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, $cookie, $string, MCRYPT_MODE_ECB);
         return $decrypted_string;
+    }
+
+    public static function clean($string, $inverse = false) {
+        $dirty = array("+", "/", "=");
+        $clean = array("_PLUS_", "_SLASH_", "_EQUAL_");
+        if ($inverse) {
+            return str_replace($clean, $dirty, $string);
+        }
+        return str_replace($dirty, $clean, $string);
+    }
+
+    public static function encryptIt($plaintext) {
+        $cipher      = "AES-128-CBC";
+        $ivlen       = openssl_cipher_iv_length($cipher);
+        $iv          = openssl_random_pseudo_bytes($ivlen);
+        $key         = new CHttpCookie('secret-key', $iv);
+        $key->expire = time() + 60 * 60 * 24 * 180;
+
+        Yii::app()->request->cookies['secret-key'] = $key;
+
+        $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+        $hmac           = hash_hmac('sha256', $ciphertext_raw, $key, true);
+        return self::clean(base64_encode($iv . $hmac . $ciphertext_raw));
+    }
+
+    public static function decryptIt($ciphertext) {
+        $c      = base64_decode(self::clean($ciphertext, true));
+        $cipher = "AES-128-CBC";
+        $ivlen  = openssl_cipher_iv_length($cipher);
+        $iv     = substr($c, 0, $ivlen);
+
+        $key = isset(Yii::app()->request->cookies['secret-key']) ? Yii::app()->request->cookies['secret-key']->value : false;
+
+        if (!$key) {
+            return false;
+        }
+
+        $hmac           = substr($c, $ivlen, $sha2len        = 32);
+        $ciphertext_raw = substr($c, $ivlen + $sha2len);
+        return openssl_decrypt($ciphertext_raw, $cipher, $key, OPENSSL_RAW_DATA, $iv);
     }
 
 }

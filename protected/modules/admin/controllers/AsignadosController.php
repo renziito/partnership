@@ -32,6 +32,8 @@ class AsignadosController extends Controller {
         $model->estado = 0;
 
         if ($model->save()) {
+            UsuarioRespuesta::model()->updateAll(['estado' => 0], 'estado = 1 AND examen_id = ' . $model->examen_id);
+
             $route = $this->createUrl('index', ['id' => $model->examen_id]);
             $this->redirect($route);
             $this->redirect(['index']);

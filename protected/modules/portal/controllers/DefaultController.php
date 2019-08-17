@@ -57,6 +57,8 @@ class DefaultController extends Controller {
     }
 
     public function actionsavePrueba($examen) {
+        unset(Yii::app()->request->cookies['secret-key']);
+
         $preguntas = Yii::app()->request->getPost('Prueba');
         $id        = Yii::app()->user->id;
         $correctas = 0;
