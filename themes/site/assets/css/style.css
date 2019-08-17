@@ -95,3 +95,22 @@
     background: linear-gradient(0deg, rgba(142,183,30,1) 0%, rgba(205,227,145,1) 55%, rgba(142,183,30,1) 100%);
     color: grey !important;
 }
+
+.sidebar-header img {
+    margin-top: -20px !important;
+    margin-left: -8% !important;
+}
+
+.brand img {
+    height: 100px !important;
+}
+
+@media only screen and (min-width: 980px){
+    body.menu-behind .header .brand {
+        height: 60px;
+    }
+
+    body.menu-behind .header .brand img{
+        margin-top: -10%;
+    }
+}

@@ -1,9 +1,9 @@
 <nav class="page-sidebar bg-partnership" data-pages="sidebar">
     <div class="sidebar-header bg-partnership">
-        <img src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo_white.png" alt="logo"
-             class="brand"  width="78" 
-             data-src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo_white.png" 
-             data-src-retina="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo_white.png" />
+        <img src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" alt="logo"
+             class="brand"  width="200" 
+             data-src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" 
+             data-src-retina="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" />
     </div>
     <div class="sidebar-menu">
         <ul class="menu-items">

@@ -11,7 +11,10 @@ $this->breadcrumbs = array(
 
 <div class="card card-default m-t-30">
     <div class="card-body">
-        <div class="container p-5 m-b-50">
+        <div class="container">
+            <img class="img-responsive m-auto" src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-normal.png"/>
+        </div>
+        <div class="container m-b-50 p-md-5">
             <p class="text-justify">
                 Está a punto de ingresar a la interface para realizar las pruebas.
                 Tenga en cuenta que las pruebas pueden tener una duración determinada. 
