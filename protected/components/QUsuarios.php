@@ -24,7 +24,8 @@ class QUsuarios {
                      ) ";
         }
 
-        $sql = "SELECT * FROM usuario u
+        $sql = "SELECT u.*, CONCAT(u.nombres,' ',u.apellidos) as nombre_completo, 
+                CONCAT(u.nombres,' ',u.apellidos,' (',u.dni,')') as full_data FROM usuario u
                 WHERE u.estado = 1" . $where;
 
         return Yii::app()->db->createCommand($sql)->queryAll();

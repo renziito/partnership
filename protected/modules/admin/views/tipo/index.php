@@ -18,6 +18,7 @@ $this->breadcrumbs = array(
         'id'           => 'tipo-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
+        'itemsCssClass'  => 'table',
         'columns'      => [
             'id',
             'tipo',

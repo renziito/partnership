@@ -24,6 +24,7 @@ $this->breadcrumbs = array(
         'id'           => 'usuario-examen-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
+        'itemsCssClass'  => 'table',
         'columns'      => [
             [
                 'name'        => 'id',
@@ -32,7 +33,8 @@ $this->breadcrumbs = array(
             [
                 'name'  => 'usuario_id',
                 'value' => function($data) {
-                    return Usuario::model()->findByPk($data->usuario_id)->nombres;
+                    $user = Usuario::model()->findByPk($data->usuario_id);
+                    return $user->nombres.' '. $user->apellidos;
                 }
             ],
             'hasta',

@@ -18,6 +18,7 @@ $this->breadcrumbs = array(
         'id'           => 'examen-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
+        'itemsCssClass'  => 'table',
         'columns'      => [
             [
                 'name'        => 'id',

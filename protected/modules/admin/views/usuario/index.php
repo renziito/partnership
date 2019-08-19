@@ -21,6 +21,7 @@ $this->breadcrumbs = array(
         'id'           => 'usuario-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
+        'itemsCssClass'  => 'table',
         'columns'      => [
             'id',
             'nombres',

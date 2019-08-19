@@ -28,7 +28,7 @@ $usuarioModel = QUsuarios::getAll($id);
         <div class="col-md-9 col-xs-12">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'usuario_id'); ?>
-                <?php $user         = Chtml::listData($usuarioModel, 'id', 'nombres') ?>
+                <?php $user         = Chtml::listData($usuarioModel, 'id', 'full_data') ?>
                 <?=
                 $form->dropDownList($model, 'usuario_id', $user, [
                     'class' => 'select2'

@@ -29,6 +29,7 @@ $pregunta = Pregunta::model()->findByPk($id);
         'id'           => 'respuesta-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
+        'itemsCssClass'  => 'table',
         'columns'      => [
             'id',
             [

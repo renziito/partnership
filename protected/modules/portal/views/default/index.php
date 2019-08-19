@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 ?>
 <div class="container text-center">
     <h1 class="m-b-50"><b>BIENVENIDO <?= strtoupper(Yii::app()->user->nombres) ?></b></h1>
-    <small>¿Que necesitas hacer?</small>
+    <h6>¿Que necesitas hacer?</h6>
     <div class="row m-t-20">
         <div class="col-md-6">
             <a href="<?= $this->createUrl('pruebas') ?>" >

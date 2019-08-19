@@ -23,6 +23,7 @@ $model->examen_id = $id;
         'id'           => 'pregunta-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
+        'itemsCssClass'  => 'table',
         'columns'      => [
             'id',
             [

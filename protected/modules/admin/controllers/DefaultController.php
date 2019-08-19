@@ -1,9 +1,10 @@
 <?php
 
-class DefaultController extends Controller
-{
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
+class DefaultController extends Controller {
+
+    public function actionIndex() {
+        $route = Yii::app()->createUrl('admin/examen');
+        $this->redirect($route);
+    }
+
 }
