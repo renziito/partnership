@@ -48,7 +48,7 @@
         <div class="col-md-6 col-xs-12">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'timer'); ?>
-                <?= $form->numberField($model, 'timer', ['class' => 'form-control']); ?>
+                <?= $form->numberField($model, 'timer', ['class' => 'form-control', 'step' => 'any']); ?>
             </div>
         </div>
         <div class="col-md-6 col-xs-12">

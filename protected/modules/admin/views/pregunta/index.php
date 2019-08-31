@@ -20,11 +20,11 @@ $model->examen_id = $id;
 <div class="table-responsive">
     <?php
     $this->widget('zii.widgets.grid.CGridView', [
-        'id'           => 'pregunta-grid',
-        'dataProvider' => $model->search(),
-        'filter'       => $model,
-        'itemsCssClass'  => 'table',
-        'columns'      => [
+        'id'            => 'pregunta-grid',
+        'dataProvider'  => $model->search(),
+        'filter'        => $model,
+        'itemsCssClass' => 'table',
+        'columns'       => [
             'id',
             [
                 'name'  => 'pregunta',
@@ -39,17 +39,13 @@ $model->examen_id = $id;
                 }
             ],
             [
-                'header' => 'Alternativas',
+                'header' => 'Alternativas (Total/Puntaje)',
                 'value'  => function($data) {
-                    $where    = "estado = 1 AND pregunta_id = " . $data->id;
-                    $total    = Respuesta::model()->count($where);
-                    $where    .= " AND correcta = 1";
-                    $correcta = Respuesta::model()->count($where);
-                    if ($correcta == 0) {
-                        $total = "<i class='fas fa-times fa-4x text-danger'></i>";
-                    }
-
-                    echo $total;
+                    $where = "estado = 1 AND pregunta_id = " . $data->id;
+                    $alter = Respuesta::model()->findAll($where);
+                    $total = count($alter);
+                    $sum = array_reduce($alter, function($sum,$alter){$sum += $alter->puntaje; return $sum;},'0') ;
+                    echo $total . '/' . $sum;
                 }
             ],
             [

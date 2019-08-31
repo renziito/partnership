@@ -6,19 +6,45 @@ $this->breadcrumbs = array(
     'Notas'
 );
 ?>
+<script>
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+        downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            downloadLink.download = filename;
+            downloadLink.click();
+    }
+    }
+</script>
 <div class="container">
-    <h1 class="m-b-50"><b>NOTAS</b></h1>
+    <h1 class="m-b-50">
+        <b>NOTAS</b>
+        <button  class="btn btn-primary pull-right" onclick="exportTableToExcel('notas', 'Notas_al_<?= date('d_m_Y') ?>')">Exportar a Excel</button>
+    </h1>
     <div class="row m-t-20">
         <div class="col-md-12">
-            <table class="table">
+            <table class="table" id="notas">
                 <thead>
                     <tr style="background-color: grey;">
-                        <th style="color:white;font-size: 13px;">ID</th>
-                        <th style="color:white;font-size: 13px;">Usuario</th>
-                        <th style="color:white;font-size: 13px;">DNI</th>
-                        <th style="color:white;font-size: 13px;">Examen</th>
-                        <th style="color:white;font-size: 13px;">Nota</th>
-                        <th style="color:white;font-size: 13px;">Fecha</th>
+                        <th style="color:black;font-size: 13px;">ID</th>
+                        <th style="color:black;font-size: 13px;">Usuario</th>
+                        <th style="color:black;font-size: 13px;">DNI</th>
+                        <th style="color:black;font-size: 13px;">Examen</th>
+                        <th style="color:black;font-size: 13px;">Nota</th>
+                        <th style="color:black;font-size: 13px;">Fecha</th>
                     </tr>
                 </thead>
                 <tbody>

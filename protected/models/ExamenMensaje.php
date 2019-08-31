@@ -1,23 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "respuesta".
+ * This is the model class for table "examen_mensaje".
  *
- * The followings are the available columns in table 'respuesta':
+ * The followings are the available columns in table 'examen_mensaje':
  * @property integer $id
- * @property integer $pregunta_id
- * @property string $respuesta
- * @property string $puntaje
+ * @property integer $examen_id
+ * @property string $min
+ * @property string $max
+ * @property string $mensaje
  * @property integer $estado
  */
-class Respuesta extends CActiveRecord
+class ExamenMensaje extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'respuesta';
+		return 'examen_mensaje';
 	}
 
 	/**
@@ -28,12 +29,13 @@ class Respuesta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pregunta_id, respuesta', 'required', 'message' => '{attribute} no debe estar vacio.'),
-			array('pregunta_id, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
-			array('puntaje', 'length', 'max'=>18),
+			array('examen_id, min, max, mensaje', 'required', 'message' => '{attribute} no debe estar vacio.'),
+			array('examen_id, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
+			array('min, max', 'length', 'max'=>18),
+			array('mensaje', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, pregunta_id, respuesta, puntaje, estado', 'safe', 'on'=>'search'),
+			array('id, examen_id, min, max, mensaje, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,9 +57,10 @@ class Respuesta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'pregunta_id' => 'Pregunta',
-			'respuesta' => 'Respuesta',
-			'puntaje' => 'Puntaje',
+			'examen_id' => 'Examen',
+			'min' => 'Min',
+			'max' => 'Max',
+			'mensaje' => 'Mensaje',
 			'estado' => 'Estado',
 		);
 	}
@@ -81,9 +84,10 @@ class Respuesta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('pregunta_id',$this->pregunta_id);
-		$criteria->compare('respuesta',$this->respuesta,true);
-		$criteria->compare('puntaje',$this->puntaje,true);
+		$criteria->compare('examen_id',$this->examen_id);
+		$criteria->compare('min',$this->min,true);
+		$criteria->compare('max',$this->max,true);
+		$criteria->compare('mensaje',$this->mensaje,true);
 		$criteria->compare('estado',$this->estado);
 
 		$criteria->addCondition('estado = TRUE','AND');
@@ -97,7 +101,7 @@ class Respuesta extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Respuesta the static model class
+	 * @return ExamenMensaje the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

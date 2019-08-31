@@ -33,21 +33,13 @@ if ($model->isNewRecord) {
         </div>
         <div class="col-xs-3">
             <div class="form-group form-group-default required">
-                <?= $form->labelEx($model, 'correcta'); ?>
-                <?=
-                $form->checkBox($model, 'correcta', array(
-                    'data-init-plugin' => 'switchery',
-                    'data-size'        => 'small',
-                    'data-size'        => 'success',
-                    'data-switchery'   => "true"
-                ));
-                ?>
+                <?= $form->labelEx($model, 'puntaje'); ?>
+                <?= $form->numberField($model, 'puntaje', ['class' => 'form-control', 'step' => 'any']); ?>
             </div>
         </div>
     </div>
     <small>
-        Si selecciona que esta es la correcta, las demás alternativas 
-        se marcarán como "incorrectas".
+        El sistema sumara todos los puntajes para dar el resultado final.
     </small>
 
 

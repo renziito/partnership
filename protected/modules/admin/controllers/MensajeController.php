@@ -1,25 +1,18 @@
 <?php
 
-class AlternativasController extends Controller {
+class MensajeController extends Controller {
 
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      */
     public function actionCreate($id) {
-        $model              = new Respuesta;
-        $post               = Yii::app()->request->getPost('Respuesta', false);
-        $model->pregunta_id = $id;
+        $model = new ExamenMensaje;
+        $post  = Yii::app()->request->getPost('ExamenMensaje', false);
 
         if ($post) {
             $model->attributes = $post;
-
-            if ($model->correcta) {
-                Respuesta::model()->updateAll(
-                        ['correcta' => 0],
-                        'correcta = 1 AND pregunta_id = ' . $id);
-            }
-
+            $model->examen_id  = $id;
             if ($model->save()) {
                 $route = $this->createUrl('index', ['id' => $id]);
                 $this->redirect($route);
@@ -36,14 +29,13 @@ class AlternativasController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-        $post  = Yii::app()->request->getPost('Respuesta', false);
+        $post  = Yii::app()->request->getPost('ExamenMensaje', false);
 
         if ($post) {
             $model->attributes = $post;
-            $pregunta          = $model->pregunta_id;
-
             if ($model->save()) {
-                $route = $this->createUrl('index', ['id' => $pregunta]);
+                $examen = $model->examen_id;
+                $route  = $this->createUrl('index', ['id' => $examen]);
                 $this->redirect($route);
             }
         }
@@ -61,8 +53,8 @@ class AlternativasController extends Controller {
         $model->estado = 0;
 
         if ($model->save()) {
-            $pregunta = $model->pregunta_id;
-            $route    = $this->createUrl('index', ['id' => $pregunta]);
+            $examen = $model->examen_id;
+            $route  = $this->createUrl('index', ['id' => $examen]);
             $this->redirect($route);
         }
     }
@@ -70,14 +62,13 @@ class AlternativasController extends Controller {
     /**
      * Manages all models.
      */
-    public function actionIndex($id) {
-        $model      = new Respuesta('search');
+    public function actionIndex() {
+        $model      = new ExamenMensaje('search');
         $model->unsetAttributes();  // clear any default values
-        $attributes = Yii::app()->request->getQuery('Respuesta', false);
+        $attributes = Yii::app()->request->getQuery('ExamenMensaje', false);
         if ($attributes) {
             $model->attributes = $attributes;
         }
-        $model->pregunta_id = $id;
         $this->render('index', ['model' => $model]);
     }
 
@@ -85,11 +76,11 @@ class AlternativasController extends Controller {
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return Respuesta the loaded model
+     * @return ExamenMensaje the loaded model
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = Respuesta::model()->findByPk($id);
+        $model = ExamenMensaje::model()->findByPk($id);
         if ($model === null) {
             throw new CHttpException(404, 'La página solicitada no existe.');
         }

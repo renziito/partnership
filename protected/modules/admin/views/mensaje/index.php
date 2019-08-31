@@ -1,42 +1,35 @@
 <?php
-/* @var $this AlternativasController */
-/* @var $model Respuesta */
-
-$id                 = Yii::app()->request->getQuery('id');
-$model->pregunta_id = $id;
-$pregunta           = Pregunta::model()->findByPk($id);
+/* @var $this MensajeController */
+/* @var $model ExamenMensaje */
 
 $this->breadcrumbs = array(
-    'Exámen'    => [Yii::app()->createUrl('admin/examen')],
-    'Preguntas' => [Yii::app()->createUrl('admin/pregunta/index', ['id' => $pregunta->examen_id])],
-    'Alternativas',
+    'Examen' => [Yii::app()->createUrl('admin/examen')],
+    'Mensajes'
 );
 
-$model->pregunta_id = $id;
-
-$pregunta = Pregunta::model()->findByPk($id);
+$id               = Yii::app()->request->getQuery('id');
+$model->examen_id = $id;
 ?>
 
 <h1>
-    Administrador de Alternativas    
-    <a class="pull-right btn btn-danger" href="<?= Yii::app()->createUrl('admin/pregunta/index', ['id' => $pregunta->examen_id]) ?>">Volver</a>
+    Administrador de Examen Mensajes  
+    <a class="pull-right btn btn-danger" href="<?= Yii::app()->createUrl('admin/examen') ?>">Volver</a>
     <a class="pull-right btn btn-success m-r-10" href="<?= $this->createUrl("create", ['id' => $id]) ?>">Nuevo</a>
 </h1>
 
 <div class="table-responsive">
     <?php
     $this->widget('zii.widgets.grid.CGridView', [
-        'id'            => 'respuesta-grid',
-        'dataProvider'  => $model->search(),
-        'filter'        => $model,
-        'itemsCssClass' => 'table',
-        'columns'       => [
+        'id'             => 'examen-mensaje-grid',
+        'dataProvider'   => $model->search(),
+        'filter'         => $model,
+        'filterPosition' => '',
+        'itemsCssClass'  => 'table',
+        'columns'        => [
             'id',
-            [
-                'name'   => 'respuesta',
-                'header' => 'Alternativa'
-            ],
-            'puntaje',
+            'min',
+            'max',
+            'mensaje',
             [
                 'class'       => 'CButtonColumn',
                 'template'    => '{actualiza}{eliminar}',
@@ -53,8 +46,8 @@ $pregunta = Pregunta::model()->findByPk($id);
                         'options' => array('title' => 'Eliminar', 'data-toggle' => 'tooltip'),
                         'click'   => 'function(){ var conf = confirm("Eliminar?"); if(conf==false)return false;}',
                     ),
-                ]
-            ],
+                ],
+            ]
         ],
     ]);
     ?>
