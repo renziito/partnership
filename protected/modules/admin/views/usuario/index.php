@@ -10,19 +10,22 @@ $this->breadcrumbs = array(
 
 <h1>
     Administrador de Usuarios    
-    <a class="pull-right btn btn-success" 
-       href="<?= $this->createUrl("create") ?>">Nuevo
+    <a class="pull-right btn btn-success" href="<?= $this->createUrl("create") ?>">
+        Nuevo
+    </a>
+    <a class="btn btn-primary pull-right m-r-10" href="<?= $this->createUrl("masivo") ?>">
+        Masivo
     </a>
 </h1>
 
 <div class="table-responsive">
     <?php
     $this->widget('zii.widgets.grid.CGridView', [
-        'id'           => 'usuario-grid',
-        'dataProvider' => $model->search(),
-        'filter'       => $model,
-        'itemsCssClass'  => 'table',
-        'columns'      => [
+        'id'            => 'usuario-grid',
+        'dataProvider'  => $model->search(),
+        'filter'        => $model,
+        'itemsCssClass' => 'table',
+        'columns'       => [
             'id',
             'nombres',
             'apellidos',

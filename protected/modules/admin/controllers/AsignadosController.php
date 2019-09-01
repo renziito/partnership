@@ -67,5 +67,9 @@ class AsignadosController extends Controller {
         }
         return $model;
     }
+    
+    public function actionNotas($id){
+        $this->render('notas');
+    }
 
 }

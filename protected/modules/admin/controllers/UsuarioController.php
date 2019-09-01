@@ -9,7 +9,34 @@ class UsuarioController extends Controller {
             $file_path   = $_FILES['file']['tmp_name'];
             $sheet_array = Yii::app()->yexcel->readActiveSheet($file_path);
             for ($i = 2; $i <= count($sheet_array); $i++) {
-                Utils::show($sheet_array[$i]);
+                $nombre    = $sheet_array[$i]['A'];
+                $apellidos = $sheet_array[$i]['B'];
+                $dni       = $sheet_array[$i]['C'];
+                $mail      = $sheet_array[$i]['D'];
+
+                $user = Usuario::model()->find("estado = 1 AND dni = '" . $dni . "' AND correo = '" . $mail . "'");
+                $id   = 0;
+                if ($user) {
+                    $id = $user->id;
+                } else {
+                    $model            = new Usuario();
+                    $model->email     = $mail;
+                    $model->dni       = $dni;
+                    $model->nombres   = $nombre;
+                    $model->apellidos = $apellidos;
+                    $model->username  = $dni;
+                    $model->password  = password_hash($dni, PASSWORD_DEFAULT);
+                    $model->save();
+
+                    $id = $model->id;
+                }
+
+                $asignacion = new UsuarioExamen();
+
+                $asignacion->examen_id  = $post['id'];
+                $asignacion->hasta      = $post['hasta'];
+                $asignacion->usuario_id = $id;
+                $asignacion->save();
             }
         }
         $this->render('masivo', compact('result'));
