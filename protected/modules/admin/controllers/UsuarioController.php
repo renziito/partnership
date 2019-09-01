@@ -2,6 +2,19 @@
 
 class UsuarioController extends Controller {
 
+    public function actionMasivo() {
+        $result = [];
+        $post   = Yii::app()->request->getPost('Masivo');
+        if ($post) {
+            $file_path   = $_FILES['file']['tmp_name'];
+            $sheet_array = Yii::app()->yexcel->readActiveSheet($file_path);
+            for ($i = 2; $i <= count($sheet_array); $i++) {
+                Utils::show($sheet_array[$i]);
+            }
+        }
+        $this->render('masivo', compact('result'));
+    }
+
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'index' page.

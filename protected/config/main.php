@@ -29,6 +29,9 @@ return array(
         'admin', 'portal'
     ),
     'components'     => array(
+        'yexcel'       => array(
+            'class' => 'ext.yexcel.Yexcel'
+        ),
         'user'         => array(
             'allowAutoLogin' => true,
             'loginUrl'       => array('login'),

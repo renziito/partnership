@@ -61,7 +61,7 @@ class DefaultController extends Controller {
 
         $preguntas = Yii::app()->request->getPost('Prueba');
         $id        = Yii::app()->user->id;
-        $correctas = 0;
+        $puntaje   = 0;
         $total     = Pregunta::model()->count('estado = 1 AND examen_id = ' . $examen);
         foreach ($preguntas as $pregunta => $respuesta) {
             $model                 = new UsuarioRespuesta();
@@ -70,17 +70,28 @@ class DefaultController extends Controller {
             $model->pregunta_id    = $pregunta;
             $model->alternativa_id = $respuesta;
 
-            $correct = Respuesta::model()->findByPk($respuesta)->correcta;
-            if ($correct) {
-                $correctas++;
-            }
+            $puntaje += Respuesta::model()->findByPk($respuesta)->puntaje;
             $model->save();
         }
         $update            = UsuarioExamen::model()->find('estado = 1 AND examen_id = ' . $examen . ' AND usuario_id = ' . $id);
         $update->respuesta = date('Y-m-d H:i:s');
-        $update->nota      = round(($correctas * 20) / $total, 2);
+        $update->nota      = $puntaje;
         $update->update();
-        $this->render('final', ['nota' => $update->nota]);
+
+        $validate = ExamenMensaje::model()->count('estado = true AND examen_id =' . $examen);
+        $mensaje  = "Tu Resultado fue : " . $update->nota;
+
+        if ($validate) {
+            $message = ExamenMensaje::model()->find(
+                    'estado = true AND examen_id =' . $examen
+                    . ' AND ' . $update->nota . ' BETWEEN min and max;'
+            );
+            if ($message) {
+                $mensaje = $message->mensaje;
+            }
+        }
+
+        $this->render('final', ['mensaje' => $mensaje]);
     }
 
 }

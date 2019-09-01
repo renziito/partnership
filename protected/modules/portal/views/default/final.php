@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
         Swal.fire({
             type: 'success',
             title: 'Tu Prueba Finalizo',
-            text: 'Tu Resultado fue : <?= $nota ?>',
+            text: '<?= $mensaje ?>',
             allowOutsideClick: false,
             confirmButtonText: 'Ir a inicio'
         }).then((result) => {
