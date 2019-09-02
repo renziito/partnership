@@ -67,9 +67,55 @@ class AsignadosController extends Controller {
         }
         return $model;
     }
-    
-    public function actionNotas($id){
-        $this->render('notas');
+
+    public function actionNotas($id) {
+        $model     = $this->loadModel($id);
+        $preguntas = Pregunta::model()->findAll(
+                'estado = 1 AND examen_id = ' . $model->examen_id);
+
+        $this->render('notas', compact('preguntas'));
+    }
+
+    public function actionsaveNotas($id) {
+        $model     = $this->loadModel($id);
+        $preguntas = Yii::app()->request->getPost('Alternativas');
+        $puntaje   = 0;
+        $promedio  = [];
+
+        foreach ($preguntas as $pregunta => $alternativa) {
+            $respuesta                 = new UsuarioRespuesta();
+            $respuesta->usuario_id     = $model->usuario_id;
+            $respuesta->examen_id      = $model->examen_id;
+            $respuesta->pregunta_id    = $pregunta;
+            $respuesta->alternativa_id = $alternativa;
+            $respuesta->save();
+
+            $nota    = Respuesta::model()->findByPk($alternativa)->puntaje;
+            $puntaje += $nota;
+
+            $index = (string) $nota;
+
+            if (isset($promedio[$index])) {
+                $promedio[$index] ++;
+            } else {
+                $promedio[$index] = 1;
+            }
+        }
+
+        $model->respuesta = date('Y-m-d H:i:s');
+        $model->nota      = $puntaje;
+        $model->update();
+
+        $validate = Examen::model()->findByPk($model->examen_id);
+
+        if ($validate->tipo_calificacion == 3) {
+            $maxs        = array_keys($promedio, max($promedio));
+            $model->nota = $maxs[0];
+            $model->update();
+        }
+
+        $route = $this->createUrl('index', ['id' => $model->examen_id]);
+        $this->redirect($route);
     }
 
 }

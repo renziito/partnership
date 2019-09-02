@@ -50,7 +50,8 @@ $this->breadcrumbs = array(
                     'notas'    => array(
                         'label'   => '<i class="fa fa-star fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("notas", array("id"=>$data->id))',
-                        'options' => array('title' => 'Notas', 'data-toggle' => 'tooltip')
+                        'options' => array('title' => 'Notas', 'data-toggle' => 'tooltip'),
+                        'visible' => '$data->nota==""'
                     ),
                     'eliminar' => array(
                         'label'   => '<i class="fa fa-trash fa-2x" style="margin-right:10px"></i>',
