@@ -13,13 +13,13 @@ class AlternativasController extends Controller {
 
         if ($post) {
             $model->attributes = $post;
-
+/*
             if ($model->correcta) {
                 Respuesta::model()->updateAll(
                         ['correcta' => 0],
                         'correcta = 1 AND pregunta_id = ' . $id);
             }
-
+*/
             if ($model->save()) {
                 $route = $this->createUrl('index', ['id' => $id]);
                 $this->redirect($route);
