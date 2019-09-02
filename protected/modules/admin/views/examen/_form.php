@@ -45,13 +45,13 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-xs-12">
+        <div class="col-xs-4">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'timer'); ?>
                 <?= $form->numberField($model, 'timer', ['class' => 'form-control', 'step' => 'any']); ?>
             </div>
         </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="col-xs-4">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'random', ['label' => 'Preguntas en orden aleatorio']); ?>
                 <?=
@@ -61,6 +61,18 @@
                     'data-color'       => "primary",
                     'data-switchery'   => "true"
                 ]);
+                ?>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group form-group-default required">
+                <?= $form->labelEx($model, 'tipo_calificacion'); ?>
+                <?=
+                $form->dropDownList($model, 'tipo_calificacion', [
+                    1 => 'Nota', 'Puntaje', 'Promedio'
+                        ], [
+                    'class' => 'form-control'
+                ])
                 ?>
             </div>
         </div>

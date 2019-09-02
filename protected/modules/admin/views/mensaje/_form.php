@@ -26,13 +26,13 @@ if ($model->isNewRecord) {
         <div class="col-md-5">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'min'); ?>
-                <?= $form->numberField($model, 'min', ['class' => 'form-control','step'=>'any']); ?>
+                <?= $form->numberField($model, 'min', ['class' => 'form-control', 'step' => 'any']); ?>
             </div>
         </div>
         <div class="col-md-5">
             <div class="form-group form-group-default required">
                 <?= $form->labelEx($model, 'max'); ?>
-                <?= $form->numberField($model, 'max', ['class' => 'form-control','step'=>'any']); ?>
+                <?= $form->numberField($model, 'max', ['class' => 'form-control', 'step' => 'any']); ?>
             </div>
         </div>
     </div>

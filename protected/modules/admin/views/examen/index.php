@@ -53,7 +53,7 @@ $this->breadcrumbs = array(
                 }
             ],
             [
-                'header' => 'Puntaje Maximo obtenible',
+                'header' => 'Puntaje Max <br> obtenible',
                 'value'  => function($data) {
                     $preguntas = Pregunta::model()->findAll(
                             'estado = 1 AND examen_id = ' . $data->id
@@ -84,7 +84,7 @@ $this->breadcrumbs = array(
             ],
             [
                 'class'       => 'CButtonColumn',
-                'template'    => '{actualiza}{pregunta}{asignar}{mensajes}{eliminar}',
+                'template'    => '{actualiza}{pregunta}{asignar}{mensajes}{promedio}{eliminar}',
                 'htmlOptions' => array('style' => 'width: 200px; text-align:center'),
                 'buttons'     => [
                     'actualiza' => array(
@@ -105,7 +105,14 @@ $this->breadcrumbs = array(
                     'mensajes'  => array(
                         'label'   => '<i class="fa fa-comment fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->createUrl("/admin/mensaje", array("id"=>$data->id))',
-                        'options' => array('title' => 'Mensajes', 'data-toggle' => 'tooltip'),
+                        'options' => array('title' => 'Mensajes x Puntaje', 'data-toggle' => 'tooltip'),
+                        'visible' => '$data->tipo_calificacion == 2'
+                    ),
+                    'promedio'  => array(
+                        'label'   => '<i class="fa fa-comment fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->createUrl("/admin/promedio", array("id"=>$data->id))',
+                        'options' => array('title' => 'Mensajes x Promedio', 'data-toggle' => 'tooltip'),
+                        'visible' => '$data->tipo_calificacion == 3'
                     ),
                     'eliminar'  => array(
                         'label'   => '<i class="fa fa-trash fa-2x" style="margin-right:10px; margin-top:10px"></i>',

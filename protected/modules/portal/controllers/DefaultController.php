@@ -63,6 +63,7 @@ class DefaultController extends Controller {
         $id        = Yii::app()->user->id;
         $puntaje   = 0;
         $total     = Pregunta::model()->count('estado = 1 AND examen_id = ' . $examen);
+        $promedio  = [];
         foreach ($preguntas as $pregunta => $respuesta) {
             $model                 = new UsuarioRespuesta();
             $model->usuario_id     = $id;
@@ -70,24 +71,46 @@ class DefaultController extends Controller {
             $model->pregunta_id    = $pregunta;
             $model->alternativa_id = $respuesta;
 
-            $puntaje += Respuesta::model()->findByPk($respuesta)->puntaje;
+            $nota    = Respuesta::model()->findByPk($respuesta)->puntaje;
+            $puntaje += $nota;
             $model->save();
+
+            $index = (string) $nota;
+
+            if (isset($promedio[$index])) {
+                $promedio[$index] ++;
+            } else {
+                $promedio[$index] = 1;
+            }
         }
         $update            = UsuarioExamen::model()->find('estado = 1 AND examen_id = ' . $examen . ' AND usuario_id = ' . $id);
         $update->respuesta = date('Y-m-d H:i:s');
         $update->nota      = $puntaje;
         $update->update();
 
-        $validate = ExamenMensaje::model()->count('estado = true AND examen_id =' . $examen);
+        $validate = Examen::model()->findByPk($examen);
         $mensaje  = "Tu Resultado fue : " . $update->nota;
 
-        if ($validate) {
+        if ($validate->tipo_calificacion == 2) {
             $message = ExamenMensaje::model()->find(
                     'estado = true AND examen_id =' . $examen
                     . ' AND ' . $update->nota . ' BETWEEN min and max;'
             );
             if ($message) {
                 $mensaje = $message->mensaje;
+            }
+        }
+
+        if ($validate->tipo_calificacion == 3) {
+            $maxs    = array_keys($promedio, max($promedio));
+            $message = ExamenPromedio::model()->find(
+                    'estado = true AND examen_id =' . $examen
+                    . ' and promedio = ' . $maxs[0] . ';'
+            );
+            if ($message) {
+                $update->nota = $maxs[0];
+                $update->update();
+                $mensaje      = $message->mensaje;
             }
         }
 

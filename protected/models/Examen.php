@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $titulo
  * @property integer $tipo_id
+ * @property integer $tipo_calificacion
  * @property integer $timer
  * @property integer $random
  * @property string $fecha
@@ -31,12 +32,12 @@ class Examen extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('tipo_id', 'required', 'message' => '{attribute} no debe estar vacio.'),
-			array('tipo_id, timer, random, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
+			array('tipo_id, tipo_calificacion, timer, random, estado', 'numerical', 'integerOnly'=>true,'message' => '{attribute} solo debe ser numeros.'),
 			array('titulo', 'length', 'max'=>255),
 			array('fecha', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, titulo, tipo_id, timer, random, fecha, estado', 'safe', 'on'=>'search'),
+			array('id, titulo, tipo_id, tipo_calificacion, timer, random, fecha, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +61,7 @@ class Examen extends CActiveRecord
 			'id' => 'ID',
 			'titulo' => 'Titulo',
 			'tipo_id' => 'Tipo',
+			'tipo_calificacion' => 'Tipo Calificacion',
 			'timer' => 'Timer',
 			'random' => 'Random',
 			'fecha' => 'Fecha',
@@ -88,6 +90,7 @@ class Examen extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('titulo',$this->titulo,true);
 		$criteria->compare('tipo_id',$this->tipo_id);
+		$criteria->compare('tipo_calificacion',$this->tipo_calificacion);
 		$criteria->compare('timer',$this->timer);
 		$criteria->compare('random',$this->random);
 		$criteria->compare('fecha',$this->fecha,true);
