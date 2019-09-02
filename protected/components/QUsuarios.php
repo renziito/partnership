@@ -100,4 +100,30 @@ class QUsuarios {
         return openssl_decrypt($ciphertext_raw, $cipher, $key, OPENSSL_RAW_DATA, $iv);
     }
 
+    public static function getResultado($id, $puntaje) {
+        $examen    = Examen::model()->findByPk($id);
+        $resultado = $puntaje;
+        if ($examen->tipo_calificacion == 2) {
+            $message = ExamenMensaje::model()->find(
+                    'estado = true AND examen_id =' . $id
+                    . ' AND ' . $puntaje . ' BETWEEN min and max;'
+            );
+            if ($message) {
+                $resultado = $message->mensaje;
+            }
+        }
+
+        if ($examen->tipo_calificacion == 3) {
+            $message = ExamenPromedio::model()->find(
+                    'estado = true AND examen_id =' . $id
+                    . ' and promedio = ' . $puntaje . ';'
+            );
+            if ($message) {
+                $resultado = $message->mensaje;
+            }
+        }
+
+        return $resultado;
+    }
+
 }

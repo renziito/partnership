@@ -44,6 +44,7 @@ $this->breadcrumbs = array(
                         <th style="color:black;font-size: 13px;">DNI</th>
                         <th style="color:black;font-size: 13px;">Examen</th>
                         <th style="color:black;font-size: 13px;">Nota</th>
+                        <th style="color:black;font-size: 13px;">Resultado</th>
                         <th style="color:black;font-size: 13px;">Fecha</th>
                     </tr>
                 </thead>
@@ -56,6 +57,7 @@ $this->breadcrumbs = array(
                             <td><?= $usuario->dni ?></td>
                             <td><?= Examen::model()->findByPk($examen->examen_id)->titulo ?></td>
                             <td><?= $examen->nota ?></td>
+                            <td><?= QUsuarios::getResultado($examen->examen_id, $examen->nota) ?></td>
                             <td><?= date('d-m-Y H:i', strtotime($examen->respuesta)) ?></td>
                         </tr>
                     <?php endforeach; ?>

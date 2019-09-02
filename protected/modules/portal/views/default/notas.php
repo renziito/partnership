@@ -15,15 +15,16 @@ $this->breadcrumbs = array(
                     <tr style="background-color: grey;">
                         <th style="color:white;font-size: 13px;">ID</th>
                         <th style="color:white;font-size: 13px;">Examen</th>
-                        <th style="color:white;font-size: 13px;">Nota</th>
+                        <th style="color:white;font-size: 13px;">Puntaje</th>
                         <th style="color:white;font-size: 13px;">Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($examenes as $examen): ?>
+                        <?php $test = Examen::model()->findByPk($examen->examen_id); ?>
                         <tr>
                             <td><?= $examen->examen_id ?></td>
-                            <td><?= Examen::model()->findByPk($examen->examen_id)->titulo ?></td>
+                            <td><?= $test->titulo ?></td>
                             <td><?= $examen->nota ?></td>
                             <td><?= date('d-m-Y H:i', strtotime($examen->respuesta)) ?></td>
                         </tr>
