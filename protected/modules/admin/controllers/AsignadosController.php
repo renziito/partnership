@@ -87,7 +87,7 @@ class AsignadosController extends Controller {
             AS num, r.* FROM `respuesta` r, (SELECT @row_number:=0) AS t
              where pregunta_id = ".$pregunta.") as foo where num =".$alternativa;
 
-            $result = Yii::app()->db->queryRow();
+            $result = Yii::app()->db->createCommand($sql)->queryRow();
 
 
             $respuesta                 = new UsuarioRespuesta();
