@@ -83,14 +83,21 @@ class AsignadosController extends Controller {
         $promedio  = [];
 
         foreach ($preguntas as $pregunta => $alternativa) {
+            $sql = "SELECT * FROM (SELECT (@row_number:=@row_number + 1)
+            AS num, r.* FROM `respuesta` r, (SELECT @row_number:=0) AS t
+             where pregunta_id = ".$pregunta.") as foo where num =".$alternativa;
+
+            $result = Yii::app()->db->queryRow();
+
+
             $respuesta                 = new UsuarioRespuesta();
             $respuesta->usuario_id     = $model->usuario_id;
             $respuesta->examen_id      = $model->examen_id;
             $respuesta->pregunta_id    = $pregunta;
-            $respuesta->alternativa_id = $alternativa;
+            $respuesta->alternativa_id = $result['id'];
             $respuesta->save();
 
-            $nota    = Respuesta::model()->findByPk($alternativa)->puntaje;
+            $nota    = $result['puntaje'];
             $puntaje += $nota;
 
             $index = (string) $nota;
