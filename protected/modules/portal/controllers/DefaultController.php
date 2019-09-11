@@ -78,7 +78,7 @@ class DefaultController extends Controller {
             $index = (string) $nota;
 
             if (isset($promedio[$index])) {
-                $promedio[$index]++;
+                $promedio[$index] ++;
             } else {
                 $promedio[$index] = 1;
             }

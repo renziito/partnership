@@ -24,10 +24,12 @@ $this->breadcrumbs = array(
                     ?>
                     <?php foreach ($pruebas as $prueba): ?>
                         <?php $examen = Examen::model()->findByPk($prueba->examen_id) ?>
-                        <div class="radio">
-                            <input type="radio" name="Examen[examen_id]" value="<?= $examen->id ?>" id="examen_<?= $examen->id ?>">
-                            <label for="examen_<?= $examen->id ?>"><?= $examen->titulo ?></label>
-                        </div>
+                        <?php if ($examen->tipo_calificacion == 1): ?>
+                            <div class="radio">
+                                <input type="radio" name="Examen[examen_id]" value="<?= $examen->id ?>" id="examen_<?= $examen->id ?>">
+                                <label for="examen_<?= $examen->id ?>"><?= $examen->titulo ?></label>
+                            </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                     <div class="m-t-40 text-center">
                         <button type="submit" class="btn btn-success"> Continuar</button>
