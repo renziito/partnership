@@ -10,6 +10,7 @@ $this->breadcrumbs = array(
 <h1>
     Administrador de Exámenes    
     <a class="pull-right btn btn-success" href="<?= $this->createUrl("create") ?>">Nuevo</a>
+    <a class="pull-right btn btn-success m-r-10" href="<?= $this->createUrl("CreateSimple") ?>">Nuevo Exámen Simple</a>
 </h1>
 
 <div class="table-responsive">
