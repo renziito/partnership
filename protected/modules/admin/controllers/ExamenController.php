@@ -18,6 +18,23 @@ class ExamenController extends Controller {
 
         $this->render('createSimple', ['model' => $model]);
     }
+
+    /**
+     * Update a new model for simple examen.
+     */
+    public function actionUpdateSimple($id) {
+        $model = $this->loadModel($id);
+        $post  = Yii::app()->request->getPost('Examen', false);
+
+        if ($post) {
+            $model->attributes = $post;
+            if ($model->save()) {
+                $this->redirect(['index']);
+            }
+        }
+        $this->render('updateSimple', ['model' => $model]);
+    }
+
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'index' page.

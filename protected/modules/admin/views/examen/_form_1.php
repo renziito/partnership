@@ -2,6 +2,13 @@
 /* @var $this ExamenController */
 /* @var $model Examen */
 /* @var $form CActiveForm */
+
+$preguntas = [];
+
+if(!$model->isNewRecord){
+    
+}
+
 ?>
 
 <div class="form">

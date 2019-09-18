@@ -85,37 +85,44 @@ $this->breadcrumbs = array(
             ],
             [
                 'class'       => 'CButtonColumn',
-                'template'    => '{actualiza}{pregunta}{asignar}{mensajes}{promedio}{eliminar}',
+                'template'    => '{actualiza}{actualizaSimple}{pregunta}{asignar}{mensajes}{promedio}{eliminar}',
                 'htmlOptions' => array('style' => 'width: 200px; text-align:center'),
                 'buttons'     => [
-                    'actualiza' => array(
+                    'actualiza'       => array(
                         'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("update", array("id"=>$data->id))',
                         'options' => array('title' => 'Actualizar', 'data-toggle' => 'tooltip'),
+                        'visible' => '$data->tipo_examen == 1'
                     ),
-                    'pregunta'  => array(
+                    'actualizaSimple' => array(
+                        'label'   => '<i class="fa fa-edit fa-2x" style="margin-right:10px"></i>',
+                        'url'     => 'Yii::app()->controller->createUrl("updateSimple", array("id"=>$data->id))',
+                        'options' => array('title' => 'Actualizar', 'data-toggle' => 'tooltip'),
+                        'visible' => '$data->tipo_examen == 2'
+                    ),
+                    'pregunta'        => array(
                         'label'   => '<i class="fa fa-question-circle fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->createUrl("/admin/pregunta", array("id"=>$data->id))',
                         'options' => array('title' => 'Preguntas', 'data-toggle' => 'tooltip'),
                     ),
-                    'asignar'   => array(
+                    'asignar'         => array(
                         'label'   => '<i class="fa fa-users fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->createUrl("/admin/asignados", array("id"=>$data->id))',
                         'options' => array('title' => 'Asignar', 'data-toggle' => 'tooltip'),
                     ),
-                    'mensajes'  => array(
+                    'mensajes'        => array(
                         'label'   => '<i class="fa fa-comment fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->createUrl("/admin/mensaje", array("id"=>$data->id))',
                         'options' => array('title' => 'Mensajes x Puntaje', 'data-toggle' => 'tooltip'),
                         'visible' => '$data->tipo_calificacion == 2'
                     ),
-                    'promedio'  => array(
+                    'promedio'        => array(
                         'label'   => '<i class="fa fa-comment fa-2x" style="margin-right:10px"></i>',
                         'url'     => 'Yii::app()->createUrl("/admin/promedio", array("id"=>$data->id))',
                         'options' => array('title' => 'Mensajes x Promedio', 'data-toggle' => 'tooltip'),
                         'visible' => '$data->tipo_calificacion == 3'
                     ),
-                    'eliminar'  => array(
+                    'eliminar'        => array(
                         'label'   => '<i class="fa fa-trash fa-2x" style="margin-right:10px; margin-top:10px"></i>',
                         'url'     => 'Yii::app()->controller->createUrl("delete", array("id"=>$data->id))',
                         'options' => array('title' => 'Eliminar', 'data-toggle' => 'tooltip'),
