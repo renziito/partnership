@@ -10,8 +10,22 @@ class ExamenController extends Controller {
         $post  = Yii::app()->request->getPost('Examen', false);
 
         if ($post) {
-            $model->attributes = $post;
+            $model->attributes  = $post;
+            $model->tipo_examen = 2;
             if ($model->save()) {
+                $alternativas = Yii::app()->request->getPost('Alternativas', false);
+                foreach ($alternativas as $k => $alternativa) {
+                    $pregunta            = new Pregunta();
+                    $pregunta->examen_id = $model->id;
+                    $pregunta->pregunta  = $k;
+                    $pregunta->save();
+                    $alter               = new Respuesta();
+                    $alter->pregunta_id  = $pregunta->id;
+                    $alter->respuesta    = $alternativa;
+                    $alter->puntaje      = $model->puntaje_positivo;
+                    $alter->save();
+                }
+
                 $this->redirect(['index']);
             }
         }
@@ -27,8 +41,17 @@ class ExamenController extends Controller {
         $post  = Yii::app()->request->getPost('Examen', false);
 
         if ($post) {
-            $model->attributes = $post;
+            $model->attributes  = $post;
+            $model->tipo_examen = 2;
             if ($model->save()) {
+
+                $alternativas = Yii::app()->request->getPost('Alternativas', false);
+                foreach ($alternativas as $k => $alternativa) {
+                    $alter            = Respuesta::model()->findByPk($k);
+                    $alter->respuesta = $alternativa;
+                    $alter->save();
+                }
+
                 $this->redirect(['index']);
             }
         }

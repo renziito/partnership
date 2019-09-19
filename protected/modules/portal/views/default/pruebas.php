@@ -24,7 +24,7 @@ $this->breadcrumbs = array(
                     ?>
                     <?php foreach ($pruebas as $prueba): ?>
                         <?php $examen = Examen::model()->findByPk($prueba->examen_id) ?>
-                        <?php if ($examen->tipo_calificacion == 1): ?>
+                        <?php if ($examen->tipo_examen == 1): ?>
                             <div class="radio">
                                 <input type="radio" name="Examen[examen_id]" value="<?= $examen->id ?>" id="examen_<?= $examen->id ?>">
                                 <label for="examen_<?= $examen->id ?>"><?= $examen->titulo ?></label>
