@@ -1,9 +1,6 @@
 <nav class="page-sidebar bg-partnership" data-pages="sidebar">
     <div class="sidebar-header bg-partnership">
-        <img src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" alt="logo"
-             class="brand"  width="200" 
-             data-src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" 
-             data-src-retina="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" />
+        <img src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" alt="logo" class="brand" width="200" data-src="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" data-src-retina="<?= Yii::app()->theme->getBaseUrl() ?>/assets/images/logo-partnership-fondoverde.png" />
     </div>
     <div class="sidebar-menu">
         <ul class="menu-items">
@@ -11,44 +8,63 @@
                 <a href="<?= Yii::app()->createUrl('portal') ?>" class="detailed">
                     <span class="title">Inicio</span>
                 </a>
+                <span class="icon-thumbnail"><i class="fa fa-home"></i></span>
             </li>
             <li>
-                <a href="<?= Yii::app()->createUrl('perfil') ?>" class="detailed">
-                    <span class="title">Perfil</span>
+                <a href="javascript:;">
+                    <span class="title">Usuarios</span>
+                    <span class=" arrow"></span>
                 </a>
+                <span class="icon-thumbnail"><i class="fa fa-users"></i></span>
+                <ul class="sub-menu">
+                    <li class="">
+                        <a href="<?= Yii::app()->createUrl('perfil') ?>">Mi Perfil</a>
+                    </li>
+                    <?php if (Yii::app()->user->rol == "admin") : ?>
+                        <li class="">
+                            <a href="<?= Yii::app()->createUrl('admin/usuario') ?>">Crear Usuarios</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
             </li>
-            <?php if (Yii::app()->user->rol == "admin"): ?>
+            <?php if (Yii::app()->user->rol == "admin") : ?>
                 <li>
-                    <a href="<?= Yii::app()->createUrl('admin/usuario') ?>" class="detailed"
-                       style="width: 100%">
-                        <span class="title">Usuarios</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?= Yii::app()->createUrl('admin/examen') ?>" class="detailed">
+                    <a href="javascript:;">
                         <span class="title">Exámenes</span>
+                        <span class=" arrow"></span>
                     </a>
+                    <span class="icon-thumbnail"><i class="fa fa-edit"></i></span>
+                    <ul class="sub-menu">
+                        <li class="">
+                            <a href="<?= Yii::app()->createUrl('admin/tipo') ?>">Tipo Exámen</a>
+                        </li>
+                        <li class="">
+                            <a href="<?= Yii::app()->createUrl('admin/examen') ?>">Nuestros Exámenes</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="<?= Yii::app()->createUrl('admin/notas') ?>"
-                       style="width: 100%">
-                        <span class="title">Revisión de Notas</span>
+            <?php endif; ?>
+            <?php if (Yii::app()->user->rol == "admin") : ?>
+                <li class="">
+                    <a href="<?= Yii::app()->createUrl('admin/notas') ?>" class="detailed">
+                        <span class="title"  style="width:100%">Revisión de Notas</span>
                     </a>
-                </li>
-                <li>
-                    <a href="<?= Yii::app()->createUrl('admin/tipo') ?>" class="detailed"
-                       style="width: 100%">
-                        <span class="title">Tipo Exámen</span>
-                    </a>
+                    <span class="icon-thumbnail"><i class="fa fa-eye"></i></span>
                 </li>
             <?php endif; ?>
             <li>
-                <a href="<?= Yii::app()->createUrl('logout') ?>" class="detailed"
-                   style="width: 100%">
-                    <span class="title">Cerrar Sesión</span>
+                <a href="<?= Yii::app()->createUrl('logout') ?>" class="detailed">
+                    <span class="title" style="width:100%">Cerrar Sesión</span>
                 </a>
+                <span class="icon-thumbnail"><i class="fa fa-sign-out-alt"></i></span>
             </li>
         </ul>
         <div class="clearfix"></div>
     </div>
 </nav>
+<style>
+    .page-sidebar .sidebar-menu .menu-items>li ul.sub-menu {
+        background-color: #8EB71E;
+        color: white
+    }
+</style>
