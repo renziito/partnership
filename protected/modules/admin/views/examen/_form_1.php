@@ -107,7 +107,7 @@ $model->tipo_calificacion = 1;
 
 <script>
     $('#btn-continue').on('click', function () {
-        var title = $('<h3>').html('Preguntas <small>Cada letra de las alternativas deberan registrarse como números (1 = a, 2=b .. etc)</small>');
+        var title = $('<h3>').html('Respuestas Correctas <small>Cada letra de las alternativas deberan registrarse como números (1 = a, 2=b .. etc)</small>');
         var preguntas = $('<div>');
         var save = $('<input>').addClass('btn btn-success').attr('type', 'submit').attr('value', 'Guardar');
         var cantidad = $('#cantidad').val();
