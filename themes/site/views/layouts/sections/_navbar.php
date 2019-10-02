@@ -45,16 +45,16 @@
                 </li>
             <?php endif; ?>
             <?php if (Yii::app()->user->rol == "admin") : ?>
-                <li class="">
+                <li>
                     <a href="<?= Yii::app()->createUrl('admin/notas') ?>" class="detailed">
-                        <span class="title"  style="width:100%">Revisión de Notas</span>
+                        <span class="title">Notas</span>
                     </a>
                     <span class="icon-thumbnail"><i class="fa fa-eye"></i></span>
                 </li>
             <?php endif; ?>
-            <li>
+            <li class="m-t-100">
                 <a href="<?= Yii::app()->createUrl('logout') ?>" class="detailed">
-                    <span class="title" style="width:100%">Cerrar Sesión</span>
+                    <span class="title">Salir</span>
                 </a>
                 <span class="icon-thumbnail"><i class="fa fa-sign-out-alt"></i></span>
             </li>
@@ -66,5 +66,17 @@
     .page-sidebar .sidebar-menu .menu-items>li ul.sub-menu {
         background-color: #8EB71E;
         color: white
+    }
+    .page-sidebar a:visited, .page-sidebar button:visited, .page-sidebar a:focus, .page-sidebar button:focus {
+        color: black;
+    }
+
+    .page-sidebar a, .page-sidebar button {
+        color: black;
+    }
+    .icon-thumbnail{
+        line-height: 30px;
+        margin-right: 0px;
+        color: black;
     }
 </style>
