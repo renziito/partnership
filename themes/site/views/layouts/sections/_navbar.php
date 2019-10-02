@@ -65,7 +65,8 @@
 <style>
     .page-sidebar .sidebar-menu .menu-items>li ul.sub-menu {
         background-color: #8EB71E;
-        color: white
+        color: white;
+        padding: 5px 0 10px 0;
     }
     .page-sidebar a:visited, .page-sidebar button:visited, .page-sidebar a:focus, .page-sidebar button:focus {
         color: black;
