@@ -17,12 +17,11 @@ $this->breadcrumbs = array(
                     Esta sección consta de 24 preguntas sobre deducción y comprensión de lectura.
                     En cada pregunta deberá usted elegir sólo una opción como respuesta.
                     Puedes dejar preguntas en blanco.
+                    Luego se mostrarán 16 preguntas sobre operaciones matemáticas.
                     Las respuestas incorrectas tienen un valor negativo equivalente a un cuarto de
                     puntaje asignado a la pregunta correctamente contestada.
                     Las preguntas no contestadas tienen un puntaje nulo (cero).
-                    La duración de la presente sección es de 45 minutos. Al culminar el tiempo se pasará
-                    automáticamente a la siguiente etapa.  Usted cuenta 
-                    con 45 minutos para resulverla.
+                    La duración de la presente prueba es de 90 minutos.
                 </b>
             </div>
             <div class="m-t-40 text-center">
@@ -237,13 +236,13 @@ $this->breadcrumbs = array(
                     </div>
                 </div>
             </div>
-            
+
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(16)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(17)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(18)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(19)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(20)]) ?>
-            
+
             <div class="card card-transparent text-justify">
                 <div class="card-body no-padding">
                     <div id="card-circular-minimal" class="card card-default">
@@ -303,11 +302,30 @@ $this->breadcrumbs = array(
                     </div>
                 </div>
             </div>
-            
+
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(21)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(22)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(23)]) ?>
             <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(24)]) ?>
+
+            <hr>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(1, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(2, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(3, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(4, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(5, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(6, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(7, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(8, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(9, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(10, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(11, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(12, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(13, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(14, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(15, true)]) ?>
+            <?php $this->renderPartial('_pregunta', ['pregunta' => UHabilidad::getAllforHabilidad(16, true)]) ?>
+
             <br>
             <button type="submit" class="btn btn-success">Terminar</button>
             <?php $this->endWidget(); ?>
@@ -315,17 +333,24 @@ $this->breadcrumbs = array(
         <div class="col-xs-2">
             <div style="position:fixed">
                 <div class="countdown"></div><br/>
-                <progress id="progressbar" value="2700" max="2700"></progress>
+                <progress id="progressbar" value="5400" max="5400"></progress>
             </div>
         </div>
     </div>
 </div>
 <script>
     $('#btn-continue').on('click', function () {
+
+        $('input[type="radio"]').each(function () {
+            if (this.value == 0) {
+                this.checked = true;
+            }
+        });
+
         $('.preguntas').removeClass('hidden');
         $('.intro').addClass('hidden');
 
-        var i = 2700;
+        var i = 5400;
 
         var counterBack = setInterval(function () {
             i--;
@@ -345,7 +370,7 @@ $this->breadcrumbs = array(
 
         }, 1000);
 
-        var timer2 = "45:00";
+        var timer2 = "90:00";
         var interval = setInterval(function () {
             var timer = timer2.split(':');
             var minutes = parseInt(timer[0], 10);
